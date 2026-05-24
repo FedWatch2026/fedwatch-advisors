@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FedWatch Advisors – Innovative Investing in the Fed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #0a1628;
+    --navy2:   #112240;
+    --gold:    #b8963e;
+    --gold2:   #d4af5a;
+    --cream:   #f5f1eb;
+    --text:    #1a1a2e;
+    --muted:   #5a6580;
+    --border:  #ddd5c8;
+    --white:   #ffffff;
+    --ff-head: 'Cormorant Garamond', Georgia, serif;
+    --ff-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--ff-body); color: var(--text); background: var(--white); overflow-x: hidden; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px; height: 76px;
+    background: rgba(10,22,40,0.96); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(184,150,62,0.2);
+  }
+  .nav-logo {
+    font-family: var(--ff-head); font-size: 1.35rem; font-weight: 600;
+    color: var(--white); letter-spacing: 0.03em; text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-logo-icon {
+    width: 34px; height: 34px; border: 1.5px solid var(--gold);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; color: var(--gold); font-family: var(--ff-body); font-weight: 500;
+    letter-spacing: 0;
+  }
+  .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.82); text-decoration: none;
+    font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold2); }
+  .nav-cta {
+    background: var(--gold); color: var(--navy) !important;
+    padding: 9px 22px; border-radius: 2px; font-weight: 500 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold2) !important; color: var(--navy) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+    background: var(--navy); position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 30% 50%, rgba(184,150,62,0.08) 0%, transparent 70%);
+  }
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 140px 70px 80px 80px; position: relative; z-index: 2;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 28px;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 32px; height: 1px; background: var(--gold);
+  }
+  .hero h1 {
+    font-family: var(--ff-head); font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+    font-weight: 300; line-height: 1.12; color: var(--white); margin-bottom: 28px;
+    animation: fadeUp 0.9s ease both;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold2); }
+  .hero-sub {
+    font-size: 1.02rem; line-height: 1.7; color: rgba(255,255,255,0.68);
+    max-width: 440px; margin-bottom: 44px;
+    animation: fadeUp 0.9s 0.15s ease both;
+  }
+  .hero-btns { display: flex; gap: 16px; animation: fadeUp 0.9s 0.28s ease both; }
+  .btn-primary {
+    background: var(--gold); color: var(--navy); padding: 14px 32px;
+    font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 500; text-decoration: none; border-radius: 2px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold2); transform: translateY(-1px); }
+  .btn-outline {
+    border: 1px solid rgba(255,255,255,0.35); color: var(--white); padding: 14px 32px;
+    font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
+    font-weight: 400; text-decoration: none; border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+  .hero-stats {
+    margin-top: 60px; display: flex; gap: 40px; padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    animation: fadeUp 0.9s 0.4s ease both;
+  }
+  .hero-stat-num {
+    font-family: var(--ff-head); font-size: 2.4rem; font-weight: 300; color: var(--gold2);
+  }
+  .hero-stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); letter-spacing: 0.06em; margin-top: 3px; }
+  .hero-right {
+    position: relative; overflow: hidden;
+  }
+  .hero-img {
+    width: 100%; height: 100%; object-fit: cover; opacity: 0.55;
+    filter: grayscale(20%);
+  }
+  .hero-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, var(--navy) 0%, transparent 40%),
+                linear-gradient(to top, var(--navy) 0%, transparent 30%);
+  }
+  .hero-ticker {
+    position: absolute; bottom: 30px; left: 0; right: 0;
+    display: flex; gap: 32px; padding: 0 30px;
+    font-size: 0.72rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.5);
+  }
+  .ticker-item strong { color: var(--gold2); margin-right: 6px; }
+  .ticker-up { color: #4caf82; }
+  .ticker-dn { color: #e05c5c; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION BASE ── */
+  section { width: 100%; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::before { content: ''; width: 28px; height: 1px; background: var(--gold); display: block; }
+  .section-title {
+    font-family: var(--ff-head); font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300; line-height: 1.2; color: var(--navy);
+  }
+
+  /* ── SERVICES ── */
+  .services { background: var(--cream); padding: 110px 0; }
+  .services-header { text-align: center; margin-bottom: 70px; }
+  .services-header .section-label { justify-content: center; }
+  .services-header .section-label::before { display: none; }
+  .services-tabs {
+    display: flex; justify-content: center; gap: 0; margin-bottom: 60px;
+    border: 1px solid var(--border); border-radius: 3px; overflow: hidden; background: var(--white);
+    max-width: 700px; margin-left: auto; margin-right: auto;
+  }
+  .tab-btn {
+    flex: 1; padding: 16px 10px; font-size: 0.75rem; letter-spacing: 0.1em;
+    text-transform: uppercase; cursor: pointer; border: none; background: transparent;
+    color: var(--muted); font-family: var(--ff-body); transition: all 0.2s;
+    border-right: 1px solid var(--border);
+  }
+  .tab-btn:last-child { border-right: none; }
+  .tab-btn.active { background: var(--navy); color: var(--gold); }
+  .tab-btn:not(.active):hover { background: var(--cream); color: var(--navy); }
+  .service-panels { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .service-panel { display: none; }
+  .service-panel.active { display: grid; grid-template-columns: 1fr 1fr; }
+  .service-img { width: 100%; height: 420px; object-fit: cover; }
+  .service-content { padding: 60px 52px; background: var(--white); }
+  .service-content h3 {
+    font-family: var(--ff-head); font-size: 1.8rem; font-weight: 400;
+    color: var(--navy); margin-bottom: 20px;
+  }
+  .service-content p { font-size: 0.95rem; line-height: 1.75; color: var(--muted); margin-bottom: 28px; }
+  .service-content ul { list-style: none; margin-bottom: 36px; }
+  .service-content ul li {
+    font-size: 0.88rem; color: var(--text); padding: 9px 0;
+    border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 10px;
+  }
+  .service-content ul li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
+
+  /* ── INSIGHTS ── */
+  .insights { padding: 110px 0; background: var(--white); }
+  .insights-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 60px;
+  }
+  .insights-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+  .insight-card { background: var(--white); padding: 40px 36px; transition: background 0.2s; cursor: pointer; }
+  .insight-card:hover { background: var(--cream); }
+  .insight-date { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 14px; }
+  .insight-card h4 {
+    font-family: var(--ff-head); font-size: 1.25rem; font-weight: 400; line-height: 1.4;
+    color: var(--navy); margin-bottom: 16px;
+  }
+  .insight-read { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+  .insight-tag {
+    display: inline-block; padding: 3px 10px; background: rgba(184,150,62,0.1);
+    color: var(--gold); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+    border-radius: 2px; margin-bottom: 14px;
+  }
+
+  /* ── TEAM ── */
+  .team { background: var(--navy); padding: 110px 0; }
+  .team .section-title { color: var(--white); }
+  .team-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
+  .team-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; }
+  .team-card { text-align: center; }
+  .team-avatar {
+    width: 100%; aspect-ratio: 1; background: var(--navy2);
+    border: 1px solid rgba(184,150,62,0.25); border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--ff-head); font-size: 2rem; font-weight: 300; color: var(--gold2);
+    margin-bottom: 16px; overflow: hidden;
+  }
+  .team-name {
+    font-family: var(--ff-head); font-size: 1rem; font-weight: 400; color: var(--white); margin-bottom: 4px;
+  }
+  .team-title { font-size: 0.72rem; color: rgba(255,255,255,0.45); letter-spacing: 0.05em; }
+
+  /* ── PHILOSOPHY STRIP ── */
+  .philosophy { background: var(--gold); padding: 80px 0; }
+  .philosophy-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .philosophy .section-label { color: var(--navy); }
+  .philosophy .section-label::before { background: var(--navy); }
+  .philosophy .section-title { color: var(--navy); }
+  .philosophy-body { font-size: 0.95rem; line-height: 1.8; color: rgba(10,22,40,0.75); margin-top: 20px; }
+  .philosophy-pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .pillar { padding: 28px; background: rgba(10,22,40,0.07); border-radius: 2px; }
+  .pillar-num {
+    font-family: var(--ff-head); font-size: 2rem; font-weight: 300; color: var(--navy); opacity: 0.3; margin-bottom: 8px;
+  }
+  .pillar h5 { font-size: 0.82rem; font-weight: 500; color: var(--navy); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+  .pillar p { font-size: 0.82rem; color: rgba(10,22,40,0.65); line-height: 1.6; }
+
+  /* ── CONTACT / CTA ── */
+  .contact { background: var(--cream); padding: 110px 0; }
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+  .contact-left p { font-size: 0.95rem; line-height: 1.8; color: var(--muted); margin: 20px 0 36px; }
+  .form-group { margin-bottom: 20px; }
+  .form-group label { display: block; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%; padding: 13px 16px; border: 1px solid var(--border);
+    border-radius: 2px; background: var(--white); font-family: var(--ff-body);
+    font-size: 0.9rem; color: var(--text); transition: border-color 0.2s;
+    appearance: none;
+  }
+  .form-group input:focus, .form-group textarea:focus {
+    outline: none; border-color: var(--gold);
+  }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--navy); padding: 70px 0 36px; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 60px; margin-bottom: 50px; }
+  .footer-brand p { font-size: 0.85rem; color: rgba(255,255,255,0.45); line-height: 1.75; margin-top: 16px; max-width: 280px; }
+  .footer-col h6 {
+    font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul li a { font-size: 0.83rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--gold2); }
+  .footer-newsletter-input {
+    display: flex; margin-top: 8px;
+  }
+  .footer-newsletter-input input {
+    flex: 1; padding: 11px 14px; background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15); border-right: none;
+    color: var(--white); font-family: var(--ff-body); font-size: 0.82rem;
+    border-radius: 2px 0 0 2px;
+  }
+  .footer-newsletter-input input::placeholder { color: rgba(255,255,255,0.3); }
+  .footer-newsletter-input button {
+    padding: 11px 18px; background: var(--gold); border: none; cursor: pointer;
+    color: var(--navy); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+    font-family: var(--ff-body); font-weight: 500; border-radius: 0 2px 2px 0;
+    transition: background 0.2s;
+  }
+  .footer-newsletter-input button:hover { background: var(--gold2); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1); padding-top: 28px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+  .footer-bottom-links { display: flex; gap: 24px; }
+  .footer-bottom-links a { font-size: 0.72rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+  .footer-bottom-links a:hover { color: var(--gold2); }
+  .footer-social { display: flex; gap: 14px; margin-top: 20px; }
+  .footer-social a {
+    width: 34px; height: 34px; border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.75rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .footer-social a:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ── DISCLAIMER ── */
+  .disclaimer { background: rgba(0,0,0,0.2); padding: 20px 60px; }
+  .disclaimer p { font-size: 0.68rem; color: rgba(255,255,255,0.2); line-height: 1.65; max-width: 1000px; }
+
+  /* ── util ── */
+  .link-arrow {
+    display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold);
+    transition: gap 0.2s;
+  }
+  .link-arrow:hover { gap: 14px; }
+  .link-arrow-white { color: rgba(255,255,255,0.6); }
+  .link-arrow-white:hover { color: var(--gold2); }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 120px 32px 60px; }
+    .service-panel.active { grid-template-columns: 1fr; }
+    .service-img { height: 260px; }
+    .insights-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .philosophy-inner { grid-template-columns: 1fr; gap: 40px; }
+    .contact-inner { grid-template-columns: 1fr; gap: 50px; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+    .container { padding: 0 24px; }
+    .services-tabs { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-icon">FW</div>
+    FedWatch <span>Advisors</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Philosophy</a></li>
+    <li><a href="#">Services</a></li>
+    <li><a href="#">Insights</a></li>
+    <li><a href="#">Contact</a></li>
+    <li><a href="#" class="nav-cta">Become a Client</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Innovative Federal Reserve Investing</div>
+    <h1>Navigate the Fed.<br><em>Command Your</em><br>Financial Future.</h1>
+    <p class="hero-sub">For over two decades, FedWatch Advisors has empowered clients to invest with clarity and conviction—turning Federal Reserve policy into portfolio opportunity.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Get Started</a>
+      <a href="#services" class="btn-outline">Our Services →</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">20+</div>
+        <div class="hero-stat-label">Years of Fed-Focused<br>Advisory Experience</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">$2B+</div>
+        <div class="hero-stat-label">Assets Under<br>Management</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">500+</div>
+        <div class="hero-stat-label">Client Families<br>Served</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img class="hero-img"
+      src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&q=80&fit=crop"
+      alt="Modern financial district" />
+    <div class="hero-img-overlay"></div>
+    <div class="hero-ticker">
+      <div class="ticker-item"><strong>Fed Funds Rate</strong> <span class="ticker-up">5.25–5.50%</span></div>
+      <div class="ticker-item"><strong>10Y Treasury</strong> <span class="ticker-up">4.62%</span></div>
+      <div class="ticker-item"><strong>S&P 500</strong> <span class="ticker-up">5,304 ▲0.4%</span></div>
+      <div class="ticker-item"><strong>DXY</strong> <span class="ticker-dn">104.2 ▼0.1%</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-label">Comprehensive Wealth Services</div>
+      <h2 class="section-title">Reach your financial goals<br>with services tailored to you.</h2>
+    </div>
+    <div class="services-tabs">
+      <button class="tab-btn active" onclick="showTab(0)">Financial Planning</button>
+      <button class="tab-btn" onclick="showTab(1)">Fed-Focused Investing</button>
+      <button class="tab-btn" onclick="showTab(2)">Wealth Management</button>
+      <button class="tab-btn" onclick="showTab(3)">Business Advisory</button>
+    </div>
+
+    <div class="service-panel active" id="tab0">
+      <img class="service-img" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=700&q=80&fit=crop" alt="Financial Planning" />
+      <div class="service-content">
+        <div class="section-label">Financial Planning</div>
+        <h3>A roadmap to reach<br>your financial life goals.</h3>
+        <p>We provide a comprehensive financial roadmap that takes into account Fed policy cycles, interest rate environments, and your personal objectives to optimize every aspect of your wealth.</p>
+        <ul>
+          <li>Optimize investments aligned with Fed rate cycle positioning</li>
+          <li>Identify seen and unforeseen financial risks</li>
+          <li>Build proactive tax strategy to maximize after-tax returns</li>
+          <li>Make informed estate planning decisions</li>
+        </ul>
+        <a href="#" class="btn-primary">Learn More</a>
+      </div>
+    </div>
+
+    <div class="service-panel" id="tab1">
+      <img class="service-img" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=700&q=80&fit=crop" alt="Fed Investing" />
+      <div class="service-content">
+        <div class="section-label">Fed-Focused Investing</div>
+        <h3>Turn Fed policy into<br>portfolio advantage.</h3>
+        <p>Our proprietary FedWatch methodology decodes central bank signals—positioning your assets ahead of rate decisions before the market reacts. This is our core differentiator.</p>
+        <ul>
+          <li>Proprietary Fed policy signal analysis</li>
+          <li>Duration and yield curve positioning strategies</li>
+          <li>Sector rotation based on monetary cycle stage</li>
+          <li>Real-time FOMC meeting insight briefings</li>
+        </ul>
+        <a href="#" class="btn-primary">Learn More</a>
+      </div>
+    </div>
+
+    <div class="service-panel" id="tab2">
+      <img class="service-img" src="https://images.unsplash.com/photo-1560472355-536de3962603?w=700&q=80&fit=crop" alt="Wealth Management" />
+      <div class="service-content">
+        <div class="section-label">Wealth Management</div>
+        <h3>Your path to financial<br>independence is unique.</h3>
+        <p>From high-net-worth individuals to multi-generational families, we craft bespoke strategies that align your long-term goals with the evolving interest rate landscape.</p>
+        <ul>
+          <li>Reach financial independence on your timeline</li>
+          <li>Achieve predictable income in retirement</li>
+          <li>Build and transfer generational wealth</li>
+          <li>Comprehensive portfolio construction and rebalancing</li>
+        </ul>
+        <a href="#" class="btn-primary">Learn More</a>
+      </div>
+    </div>
+
+    <div class="service-panel" id="tab3">
+      <img class="service-img" src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=700&q=80&fit=crop" alt="Business Advisory" />
+      <div class="service-content">
+        <div class="section-label">Business Advisory</div>
+        <h3>Navigate today's rate<br>environment as a business.</h3>
+        <p>As a business owner or executive, Fed rate decisions directly impact your cost of capital, cash management, and strategic planning. We make you rate-cycle ready.</p>
+        <ul>
+          <li>Corporate cash and treasury management strategies</li>
+          <li>Retirement plan design and 401(k) implementation</li>
+          <li>Executive compensation and deferred comp planning</li>
+          <li>Maximize business value and exit planning</li>
+        </ul>
+        <a href="#" class="btn-primary">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy">
+  <div class="container">
+    <div class="philosophy-inner">
+      <div>
+        <div class="section-label">Our Philosophy</div>
+        <h2 class="section-title" style="color:var(--navy)">The Fed moves markets.<br>We move first.</h2>
+        <p class="philosophy-body">Most advisors react to Federal Reserve decisions after the market has already priced them in. FedWatch Advisors was built on a fundamentally different premise: by studying the Fed's language, economic projections, and historical behavior, we position portfolios <em>before</em> the pivots—delivering superior risk-adjusted returns through every monetary cycle.</p>
+      </div>
+      <div class="philosophy-pillars">
+        <div class="pillar">
+          <div class="pillar-num">01</div>
+          <h5>Anticipate</h5>
+          <p>Read Fed signals early using our proprietary language-pattern analysis framework.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">02</div>
+          <h5>Position</h5>
+          <p>Rotate strategically across asset classes ahead of rate cycle inflection points.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">03</div>
+          <h5>Protect</h5>
+          <p>Rigorous risk management ensures downside protection during policy uncertainty.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">04</div>
+          <h5>Grow</h5>
+          <p>Compound long-term wealth by capitalizing on full monetary cycles over time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHTS -->
+<section class="insights" id="insights">
+  <div class="container">
+    <div class="insights-header">
+      <div>
+        <div class="section-label">From Our Team</div>
+        <h2 class="section-title">Featured Insights</h2>
+      </div>
+      <a href="#" class="link-arrow">View All Insights →</a>
+    </div>
+    <div class="insights-grid">
+      <div class="insight-card">
+        <div class="insight-tag">Fed Watch</div>
+        <div class="insight-date">May 20, 2026</div>
+        <h4>FOMC Minutes Decoded: What the May Meeting Signals for H2 Rate Cuts</h4>
+        <div class="insight-read">Read More →</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-tag">Market Strategy</div>
+        <div class="insight-date">May 13, 2026</div>
+        <h4>Duration Risk Revisited: Positioning Bonds Ahead of the Pivot</h4>
+        <div class="insight-read">Read More →</div>
+      </div>
+      <div class="insight-card">
+        <div class="insight-tag">Weekly Monitor</div>
+        <div class="insight-date">May 6, 2026</div>
+        <h4>Weekly Macro Monitor | 5.6.26 — Jobs Report & What the Fed Hears</h4>
+        <div class="insight-read">Read More →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="container">
+    <div class="team-header">
+      <div>
+        <div class="section-label">Meet Our Team</div>
+        <h2 class="section-title">We came together with a<br>clear mission: put clients first.</h2>
+      </div>
+      <a href="#" class="link-arrow link-arrow-white">More Experts →</a>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">JM</div>
+        <div class="team-name">James Merritt, CFA®</div>
+        <div class="team-title">Founder & Chief Investment Officer</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">SR</div>
+        <div class="team-name">Sandra Reyes, CFP®</div>
+        <div class="team-title">Managing Director, Wealth Planning</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">DK</div>
+        <div class="team-name">David Kim, AIF®</div>
+        <div class="team-name" style="font-size:0.85rem">Senior Wealth Advisor</div>
+        <div class="team-title">Fed Policy Specialist</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">LC</div>
+        <div class="team-name">Laura Chen, CEPA®</div>
+        <div class="team-title">Director, Business Advisory</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">MB</div>
+        <div class="team-name">Michael Burke</div>
+        <div class="team-title">Portfolio Manager, Fixed Income</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="contact-left">
+        <div class="section-label">Get In Touch</div>
+        <h2 class="section-title">Let's take care of<br>your financial future.</h2>
+        <p>Our accomplished advisors have spent two decades decoding Federal Reserve policy to empower clients with clarity and confidence. Schedule a free consultation to discuss your goals.</p>
+        <a href="tel:+18005551234" class="link-arrow" style="margin-bottom:12px; display:inline-flex">📞 (800) 555-1234</a><br>
+        <a href="mailto:hello@fedwatchadvisors.com" class="link-arrow" style="display:inline-flex; margin-top:10px">✉ hello@fedwatchadvisors.com</a>
+      </div>
+      <div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Jane">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="jane@example.com">
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" placeholder="(555) 000-0000">
+        </div>
+        <div class="form-group">
+          <label>I'm interested in</label>
+          <select>
+            <option>Financial Planning</option>
+            <option>Fed-Focused Investment Strategy</option>
+            <option>Wealth Management</option>
+            <option>Business Advisory</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message (optional)</label>
+          <textarea placeholder="Tell us about your goals..."></textarea>
+        </div>
+        <button class="btn-primary" style="border:none;cursor:pointer;width:100%;text-align:center;font-size:0.82rem;letter-spacing:0.1em">
+          Schedule Consultation →
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="nav-logo" href="#" style="text-decoration:none">
+          <div class="nav-logo-icon">FW</div>
+          FedWatch <span>Advisors</span>
+        </a>
+        <p>Innovative investing through Federal Reserve insight. Empowering clients to make financial decisions with clarity and confidence for over 20 years.</p>
+        <div class="footer-social">
+          <a href="#">in</a>
+          <a href="#">𝕏</a>
+          <a href="#">f</a>
+          <a href="#">▶</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h6>Quick Links</h6>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Our People</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h6>Site Information</h6>
+        <ul>
+          <li><a href="#">Investor Insights</a></li>
+          <li><a href="#">Disclosures</a></li>
+          <li><a href="#">Terms &amp; Privacy</a></li>
+          <li><a href="#">Form CRS</a></li>
+          <li><a href="#">Form ADV</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h6>Financial Insights, Delivered</h6>
+        <p style="font-size:0.8rem;color:rgba(255,255,255,0.4);line-height:1.65;margin-bottom:14px">
+          Sign up for our mailing list to receive periodic Fed-focused investor updates.
+        </p>
+        <div class="footer-newsletter-input">
+          <input type="email" placeholder="Your email address">
+          <button>Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>FEDWATCH ADVISORS, LLC © 2026. SEC Registered Investment Adviser.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Form CRS</a>
+        <a href="#">Form ADV</a>
+        <a href="#">SEC Advisor Check</a>
+      </div>
+    </div>
+  </div>
+  <div class="disclaimer">
+    <p>This material is provided for informational purposes only and does not constitute investment, tax, or legal advice. Past performance is not indicative of future results. All investing involves risk, including the possible loss of principal. FedWatch Advisors, LLC is a registered investment adviser. Registration does not imply a certain level of skill or training.</p>
+  </div>
+</footer>
+
+<script>
+  function showTab(idx) {
+    document.querySelectorAll('.service-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+    document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', i===idx));
+  }
+</script>
+</body>
+</html>
